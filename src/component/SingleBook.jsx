@@ -4,15 +4,15 @@ import Button from "react-bootstrap/Button";
 import Comments from "./Comments";
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
+//   state = {
+//     selected: false,
+//   };
 
-  handleToggle = () => {
-    this.setState({
-      selected: !this.state.selected,
-    });
-  };
+//   handleToggle = () => {
+//     this.setState({
+//       selected: !this.state.selected,
+//     });
+//   };
 
   //   handleBook = () => {
   //         // this.setState({book: })
@@ -23,7 +23,7 @@ class SingleBook extends Component {
       <>
         <div className="mt-4 mb-5 ml-2">
           <Card
-            onClick={this.handleToggle}
+            onClick={() => this.props.changeSelectedBook(this.props.book.asin)}
             key={this.props.book.asin}
             style={{ width: "16rem" }}
           >
@@ -46,11 +46,11 @@ class SingleBook extends Component {
         </div>
 
        
-          {this.state.selected && (
+          {/* {this.state.selected && (
             <div className="mt-4 mb-5 ml-2"  style={{ minWidth: "16rem" }}>
-              <Comments id={this.props.book.asin} />
+              <Comments asin={this.props.book.asin} />
             </div>
-          ) }
+          ) } */}
        
       </>
     );

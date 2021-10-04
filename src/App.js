@@ -1,8 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import BookList from './component/BookList';
-import MyNav from './components/MyNav';
-import MyFooter from './components/MyFooter';
+import MyNav from './component/MyNav'
+import MyFooter from './component/MyFooter';
 
 function App() {
   return (

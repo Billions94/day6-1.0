@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import DeleteComments from './DeleteComments'
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider'
 
 // import Button from 'react-bootstrap/Button'
 
@@ -16,23 +17,16 @@ class Comments extends React.Component {
       addComment: {
           comment: '',
              rate: '',
-        elementId: this.props.id
-        },
-         rate: {
-            one: '⭐️',
-            two: '⭐️⭐️',
-          three: '⭐️⭐️⭐️',
-           four: '⭐️⭐️⭐️⭐️',
-           five: '⭐️⭐️⭐️⭐️⭐️'
-        }
+        elementId: this.props.asin
+        }   
         
     }
 
 
-    fetchComments = async(id) => {
-        try {
-
-            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/` + id ,{
+    fetchComments = async(prevProps) => {
+            if(prevProps.asin !== this.props.asin){
+             try {
+            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/` + this.props.asin ,{
                 headers: {
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjJhYTRiYjUzZDAwMTViMTllZGUiLCJpYXQiOjE2MzI5OTgxNzMsImV4cCI6MTYzNDIwNzc3M30.W2FmJgztmFyCsYsNpP-CJ5-vBcKzZG3RTeo4CLvwNR8"
                 }
@@ -54,6 +48,7 @@ class Comments extends React.Component {
         } catch (e) {
             console.error(e)
         }
+    }
     }
 
     postComment = async (e)=>{
@@ -93,17 +88,17 @@ class Comments extends React.Component {
 
     }
 
-    componentDidMount = async() => {
-        this.fetchComments(this.props.id)
+    // componentDidMount = async() => {
+    //     this.fetchComments(this.props.asin)
 
-    }
+    // }
 
-    componentDidUpdate = (prevprops, prevstate) => {
+    // componentDidUpdate = (prevprops, prevstate) => {
 
-        if(prevprops.id !== this.props.id){
-            this.fetchComments(this.props.id)
-        }
-    }
+    //     if(prevprops.id !== this.props.id){
+    //         this.fetchComments(this.props.id)
+    //     }
+    // }
 
     
 
@@ -116,7 +111,6 @@ class Comments extends React.Component {
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label className="text-light">Rate book</Form.Label>
                     <Form.Control as="select" 
-                    fullWidth
                      value={this.state.addComment.rate}
                      onChange={e => this.setState({
                         addComment: {
@@ -155,7 +149,7 @@ class Comments extends React.Component {
                 this.state.comments.map(info => (
                     <div key={info._id} >
                         <ListGroup.Item >{info.comment}</ListGroup.Item>
-                        <ListGroup.Item >{this.state.rate.two}</ListGroup.Item>
+                        <ListGroup.Item >{this.state.addComment.rate}</ListGroup.Item>
                         <DeleteComments id={info._id}/>
                     </div>
                     ))
