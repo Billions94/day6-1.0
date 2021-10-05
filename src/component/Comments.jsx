@@ -3,10 +3,10 @@ import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import AddComments from './AddComments'
 // import ListGroupItem  from 'react-bootstrap/ListGroupItem'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Form from 'react-bootstrap/Form'
+// import Button from 'react-bootstrap/Button'
 import DeleteComments from './DeleteComments'
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider'
+
 
 // import Button from 'react-bootstrap/Button'
 
@@ -15,11 +15,11 @@ class Comments extends React.Component {
 
     state = {
          comments: [],
-      addComment: {
-          comment: '',
-             rate: '',
-        elementId: this.props.asin
-        }   
+    //   addComment: {
+    //       comment: '',
+    //          rate: '',
+    //     elementId: this.props.asin
+    //     }   
         
     }
 
@@ -134,15 +134,19 @@ class Comments extends React.Component {
                         Submit
                 </Button>
             </Form> */}
-            <AddComments />
             {
                 
                 this.state.comments.map(info => (
+                    <>
                     <div key={info._id} >
+                    <div>
+                        <AddComments asin={info._id} />
+                    </div>
                         <ListGroup.Item >{info.comment}</ListGroup.Item>
                         <ListGroup.Item >{info.rate}</ListGroup.Item>
                         <DeleteComments id={info._id}/>
                     </div>
+                    </>
                     ))
                     
                 }

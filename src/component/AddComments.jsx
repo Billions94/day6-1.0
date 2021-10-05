@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import DeleteComments from './DeleteComments'
+// import DeleteComments from './DeleteComments'
 
 
 class AddComments extends React.Component {
@@ -10,7 +10,7 @@ class AddComments extends React.Component {
      addComment: {
          comment: '',
             rate: '',
-       elementId: null
+       elementId: this.props.asin
        }   
        
    }
@@ -71,7 +71,7 @@ class AddComments extends React.Component {
                         <option>5</option>
                         </Form.Control>
                     </Form.Group>
-                    {/* <p>{this.state.rate.one}</p> */}
+
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="text-light">Write a review</Form.Label>
                         <Form.Control as="textarea" rows={3}

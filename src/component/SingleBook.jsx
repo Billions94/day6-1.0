@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import { Component } from "react";
 import Button from "react-bootstrap/Button";
-import Comments from "./Comments";
+// import Comments from "./Comments";
 
 class SingleBook extends Component {
 //   state = {
