@@ -1,6 +1,7 @@
 // import { isThisISOWeek } from 'date-fns/esm'
 import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
+import AddComments from './AddComments'
 // import ListGroupItem  from 'react-bootstrap/ListGroupItem'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -23,7 +24,7 @@ class Comments extends React.Component {
     }
 
 
-    fetchComments = async(prevProps) => {
+    componentDidUpdate = async(prevProps) => {
             if(prevProps.asin !== this.props.asin){
              try {
             const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/` + this.props.asin ,{
@@ -51,54 +52,44 @@ class Comments extends React.Component {
     }
     }
 
-    postComment = async (e)=>{
-        e.preventDefault()
+    // postComment = async (e)=>{
+    //     e.preventDefault()
     
         
 
-        try{
-            let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/', {
-                method: 'POST',
-                body:JSON.stringify(this.state.addComment),
-                headers: {
-             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjJhYTRiYjUzZDAwMTViMTllZGUiLCJpYXQiOjE2MzI5OTgxNzMsImV4cCI6MTYzNDIwNzc3M30.W2FmJgztmFyCsYsNpP-CJ5-vBcKzZG3RTeo4CLvwNR8",
-             "Content-Type": "application/json"
-            }
-            })
-            if(response.ok){
-                alert('Your review was successfully added')
-                                this.setState({
-                    ...this.state.addComment, addComment: {
-                        comment: '',
-                        rate: '',
-                        elementId: ''
-                    }
-                })
+    //     try{
+    //         let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/', {
+    //             method: 'POST',
+    //             body:JSON.stringify(this.state.addComment),
+    //             headers: {
+    //          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjJhYTRiYjUzZDAwMTViMTllZGUiLCJpYXQiOjE2MzI5OTgxNzMsImV4cCI6MTYzNDIwNzc3M30.W2FmJgztmFyCsYsNpP-CJ5-vBcKzZG3RTeo4CLvwNR8",
+    //          "Content-Type": "application/json"
+    //         }
+    //         })
+    //         if(response.ok){
+    //             alert('Your review was successfully added')
+    //                             this.setState({
+    //                 ...this.state.addComment, addComment: {
+    //                     comment: '',
+    //                     rate: '',
+    //                     elementId: ''
+    //                 }
+    //             })
                 
                
-            }else{
-                alert('Yikes!!! an error occurred while trying to add the review')
-            }
+    //         }else{
+    //             alert('Yikes!!! an error occurred while trying to add the review')
+    //         }
 
-        } catch(e){
-            console.log(`yikes we got an error`, e)
-        }
-        
-        
-
-    }
-
-    // componentDidMount = async() => {
-    //     this.fetchComments(this.props.asin)
-
-    // }
-
-    // componentDidUpdate = (prevprops, prevstate) => {
-
-    //     if(prevprops.id !== this.props.id){
-    //         this.fetchComments(this.props.id)
+    //     } catch(e){
+    //         console.log(`yikes we got an error`, e)
     //     }
+        
+        
+
     // }
+
+
 
     
 
@@ -107,7 +98,7 @@ class Comments extends React.Component {
             <>
 
 
-            <Form onSubmit={this.postComment} style={{ minWidth: "100%" }}>
+            {/* <Form onSubmit={this.postComment} style={{ minWidth: "100%" }}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label className="text-light">Rate book</Form.Label>
                     <Form.Control as="select" 
@@ -126,7 +117,7 @@ class Comments extends React.Component {
                     <option>5</option>
                     </Form.Control>
                 </Form.Group>
-                {/* <p>{this.state.rate.one}</p> */}
+                
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label className="text-light">Write a review</Form.Label>
                     <Form.Control as="textarea" rows={3}
@@ -142,14 +133,14 @@ class Comments extends React.Component {
                 <Button variant="primary" type="submit">
                         Submit
                 </Button>
-            </Form>
-
+            </Form> */}
+            <AddComments />
             {
                 
                 this.state.comments.map(info => (
                     <div key={info._id} >
                         <ListGroup.Item >{info.comment}</ListGroup.Item>
-                        <ListGroup.Item >{this.state.addComment.rate}</ListGroup.Item>
+                        <ListGroup.Item >{info.rate}</ListGroup.Item>
                         <DeleteComments id={info._id}/>
                     </div>
                     ))
