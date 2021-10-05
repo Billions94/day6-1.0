@@ -13,6 +13,7 @@ class Comments extends React.Component {
   state = {
     comments: [],
   };
+  
    fetchComments = async () => {
         try {
         const response = await fetch(
